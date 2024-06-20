@@ -1,0 +1,10 @@
+-I created an application Load Balancer in public subnet with listener protocol of HTTP through port 80 to distribute incoming network traffic to multiple ec2 server instances, provide high availability for the website.
+-I created an Auto Scaling group using the provided Launch Template in public subnet, and attach it to the created load balancer to serve as dynamic scaling purpose base on the demand of user if the usage of the CPU reach higher than 60%
+-I created an RDS instance with subnet group consisting of 2 private subnets. The RDS serves as a database using MYSQL engine with multiple AZ deployment options for high availability and burstable class for baseline performance. It is also configured with the given security group and use password as authentication.
+-I updated the parameter store in system manager for security and management, using the name given including username, password, database and endpoint using the endpoint link created with the RDS instance.
+-Then I updated the security group inbound rule of ec2 instance server by adding allow SSH from Bastion Host through port 22 so admin can remote access to the server hosting PHP application and database
+-Then I ssh to web server instance through bastion host   to move the content of given SQL dump file to the RDS instance. The password is the password listed in the parameter store.
+-I created a NAT gateway in public subnet and updated the route table to provide secure one-way access to the internet for user in private subnet. 
+-One thing that I tried is to create a snapshot of RDS instance and put in into an S3 bucket for backup purpose, but the limited student account didn’t allow me to create the snap shot of RDS
+
+
